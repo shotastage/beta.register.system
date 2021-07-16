@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ApiClient from './services/ApiService';
 
 interface Props { }
 
 const App: React.FC<Props> = () => {
+
+  // State
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const api = new ApiClient();
 

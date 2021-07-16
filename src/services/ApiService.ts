@@ -17,6 +17,19 @@ class ApiService {
         XHR.setRequestHeader("Content-Type", "application/json");
         XHR.send(JSON.stringify(data));
     }
+
+    absHTTPRequest(url: string, data: { [key: string]: any; } | undefined): Promise<any> {
+        return new Promise((resolve, reject) => {
+            XHR.addEventListener('readystatechange', () => {
+              if (XHR.readyState !== 4) return;
+              if (XHR.status !== 200) reject('error');
+              const data = JSON.parse(XHR.responseText);
+              resolve(data);
+            });
+            XHR.open('GET', url);
+            XHR.send();
+        });
+    }
 }
 
 export default ApiService;
